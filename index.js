@@ -88,6 +88,24 @@ app.delete('/carts/:id', async( req, res ) => {
   res.send(singlCart);
 })
 
+// put Api 0r update
+app.put('/carts/:id',async(req,res)=>{
+  const id=req.params.id;
+  console.log(id);
+  const updatateUser=req.body;
+  const filter={_id: ObjectId(id)};
+  const options={upsert:true}
+  const updateDoc={
+    $set:{
+      staus:updatateUser.staus
+    },
+  };
+  console.log(updateDoc);
+  const result = await cartItems.updateOne(filter,updateDoc,options)
+  res.json(result);
+
+
+})
 
 
 }
